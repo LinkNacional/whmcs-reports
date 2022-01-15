@@ -56,9 +56,11 @@ foreach ($results as $result) {
 for ($i = 1; $i <= date('t'); $i++) {
 
     $days[$i] = $i; 
-//for ($days as $d => $monthName) {
-
-    //if ($dayName) {
+    if($i <= 9){
+        $dayForma = "0$i" ;
+    }else{
+        $dayForma = $i;
+    }
 
         $amountin = $reportvalues[$currentyear][$k][0];
         $fees = $reportvalues[$currentyear][$k][1];
@@ -66,16 +68,13 @@ for ($i = 1; $i <= date('t'); $i++) {
         $monthlybalance = $reportvalues[$currentyear][$k][3];
 
         $reportdata['tablevalues'][] = array(
-            $i . ' ' . $month,
+            date('D', strtotime($currentyear.date('m').$dayForma)) . ' ' .$dayForma,
             formatCurrency($amountin),
             formatCurrency($fees),
             formatCurrency($amountout),
             formatCurrency($monthlybalance),
         );
-
         $overallbalance += $monthlybalance;
-
-  //  }
 
 }
 
