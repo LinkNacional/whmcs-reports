@@ -12,3 +12,4 @@ https://WHMCSDOMAIN/admin/reports.php?report=monthly_day_income_report
 
 
 * Monthly day income report show income by day on current monthy.
+![alt text](https://github.com/LinkNacional/whmcs-reports/blob/main/screenshot-report-monthly_day_income_report.png?raw=true)
