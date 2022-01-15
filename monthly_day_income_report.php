@@ -56,16 +56,20 @@ foreach ($results as $result) {
 for ($i = 1; $i <= date('t'); $i++) {
 
     $days[$i] = $i; 
-    if($i <= 9){
-        $dayForma = "0$i" ;
-    }else{
-        $dayForma = $i;
-    }
+//for ($days as $d => $monthName) {
 
-        $amountin = $reportvalues[$currentyear][$k][0];
-        $fees = $reportvalues[$currentyear][$k][1];
-        $amountout = $reportvalues[$currentyear][$k][2];
-        $monthlybalance = $reportvalues[$currentyear][$k][3];
+    //if ($dayName) {
+
+        $amountin = $reportvalues[$currentyear][$i][0];
+        $fees = $reportvalues[$currentyear][$i][1];
+        $amountout = $reportvalues[$currentyear][$i][2];
+        $monthlybalance = $reportvalues[$currentyear][$i][3];
+        
+        if($i <= 9){
+            $dayForma = "0$i" ;
+        }else{
+            $dayForma = $i;
+        }
 
         $reportdata['tablevalues'][] = array(
             date('D', strtotime($currentyear.date('m').$dayForma)) . ' ' .$dayForma,
@@ -74,7 +78,10 @@ for ($i = 1; $i <= date('t'); $i++) {
             formatCurrency($amountout),
             formatCurrency($monthlybalance),
         );
+
         $overallbalance += $monthlybalance;
+
+  //  }
 
 }
 
@@ -89,7 +96,7 @@ for ($i = 1; $i <= date('t'); $i++) {
     $chartdata['rows'][] = array(
         'c'=>array(
             array(
-                'v'=>$days,
+                'v'=>$i,
             ),
             array(
                 'v'=>$reportvalues[$currentyear-2][$i][3],
@@ -105,14 +112,6 @@ for ($i = 1; $i <= date('t'); $i++) {
             ),
         ),
     );
-}
-
-$chartdata['cols'][] = array('label' => $currentyear, 'type' => 'number');
-for ($i = 1; $i <= 12; $i++) {
-    $chartdata['rows'][] = array('c' => array(
-        array('v' => $months[$i]), 
-        array('v' => $reportvalues[$currentyear - 2][$i][3], 'f' => formatCurrency($reportvalues[$currentyear - 2][$i][3])->toFull()), 
-        array('v' => $reportvalues[$currentyear - 1][$i][3], 'f' => formatCurrency($reportvalues[$currentyear - 1][$i][3])->toFull()), array('v' => $reportvalues[$currentyear][$i][3], 'f' => formatCurrency($reportvalues[$currentyear][$i][3])->toFull())));
 }
 
 $args = array();
